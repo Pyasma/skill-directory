@@ -7,6 +7,13 @@ interface UseIsInViewOptions {
   inViewMargin?: UseInViewOptions['margin'];
 }
 
+/**
+ * Tracks whether an element is in view with optional detection settings.
+ *
+ * @param ref - The ref to connect to the observed element
+ * @param options - Controls the in-view override, one-time detection, and observer margin
+ * @returns An object containing the element ref and current in-view state
+ */
 function useIsInView<T extends HTMLElement = HTMLElement>(
   ref: React.Ref<T>,
   options: UseIsInViewOptions = {},

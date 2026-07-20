@@ -102,6 +102,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders the animated lock-open icon.
+ *
+ * @param size - The icon width and height.
+ * @returns The animated lock-open SVG element.
+ */
 function IconComponent({ size, ...props }: LockOpenProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -144,6 +150,12 @@ function IconComponent({ size, ...props }: LockOpenProps) {
   );
 }
 
+/**
+ * Renders an animated lock-open icon.
+ *
+ * @param props - Icon properties, including size and animation configuration.
+ * @returns The wrapped lock-open icon component.
+ */
 function LockOpen(props: LockOpenProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

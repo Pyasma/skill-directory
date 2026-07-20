@@ -1,6 +1,12 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
+/**
+ * Retrieves the Supabase URL and publishable key from environment variables.
+ *
+ * @returns The configured Supabase URL and publishable key
+ * @throws An error if either Supabase environment variable is missing
+ */
 function getSupabaseEnv() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
@@ -12,6 +18,11 @@ function getSupabaseEnv() {
   return { url, publishableKey };
 }
 
+/**
+ * Creates a Supabase server client configured with the request's cookie store.
+ *
+ * @returns A Supabase server client configured with the application credentials and request cookies
+ */
 export async function createSupabaseServerClient() {
   const { url, publishableKey } = getSupabaseEnv();
   const cookieStore = await cookies();

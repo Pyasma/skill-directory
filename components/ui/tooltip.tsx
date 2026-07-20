@@ -4,6 +4,11 @@ import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Provides configuration and context for tooltips.
+ *
+ * @param delay - The delay before a tooltip opens, in milliseconds.
+ */
 function TooltipProvider({
   delay = 0,
   ...props
@@ -17,14 +22,34 @@ function TooltipProvider({
   )
 }
 
+/**
+ * Provides the root context for a tooltip.
+ *
+ * @param props - Properties for configuring the tooltip root.
+ */
 function Tooltip({ ...props }: TooltipPrimitive.Root.Props) {
   return <TooltipPrimitive.Root data-slot="tooltip" {...props} />
 }
 
+/**
+ * Renders the element that controls a tooltip.
+ *
+ * @param props - Properties forwarded to the tooltip trigger.
+ */
 function TooltipTrigger({ ...props }: TooltipPrimitive.Trigger.Props) {
   return <TooltipPrimitive.Trigger data-slot="tooltip-trigger" {...props} />
 }
 
+/**
+ * Renders positioned tooltip content with an arrow and customizable styling.
+ *
+ * @param className - Additional classes to apply to the tooltip content
+ * @param side - The side of the trigger where the tooltip appears
+ * @param sideOffset - The distance between the tooltip and its trigger
+ * @param align - The alignment of the tooltip relative to the trigger
+ * @param alignOffset - The alignment offset from the trigger
+ * @param children - The content displayed inside the tooltip
+ */
 function TooltipContent({
   className,
   side = "top",

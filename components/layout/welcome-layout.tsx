@@ -1,6 +1,11 @@
 import { SidebarProvider } from "../ui/sidebar";
 import CustomSidebar from "../custom/Sidebar";
 
+/**
+ * Provides a full-screen layout with a sidebar and scrollable main content area.
+ *
+ * @param children - The page content rendered in the main content area
+ */
 export default function WelcomeLayout({
   children,
 }: {

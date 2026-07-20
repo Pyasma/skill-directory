@@ -4,6 +4,11 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+/**
+ * Renders the Skills.dev header with an optional signed link for unauthenticated users.
+ *
+ * @param signed - The label used for the link and to derive its URL path
+ */
 export default function Header({ signed }: { signed: string }) {
   const [user, setUser] = useState<unknown>(null);
 

@@ -38,6 +38,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated right-pointing chevron icon.
+ *
+ * @param size - The rendered icon width and height.
+ * @param props - Additional properties applied to the SVG element.
+ */
 function IconComponent({ size, ...props }: ChevronRightProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -65,6 +71,11 @@ function IconComponent({ size, ...props }: ChevronRightProps) {
   );
 }
 
+/**
+ * Renders an animated right-pointing chevron icon.
+ *
+ * @param props - Icon properties, including size and animation configuration.
+ */
 function ChevronRight(props: ChevronRightProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

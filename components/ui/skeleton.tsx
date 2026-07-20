@@ -1,5 +1,10 @@
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a styled loading placeholder.
+ *
+ * @returns A `div` element with skeleton styling and forwarded properties.
+ */
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div

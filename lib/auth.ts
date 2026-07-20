@@ -14,11 +14,22 @@ type ResponseResult<T = unknown> = {
 
 type OAuthProvider = "google" | "github";
 
-// Only allow internal redirect targets after auth completes.
+/**
+ * Validates an authentication redirect target.
+ *
+ * @param nextPath - The requested redirect path
+ * @returns The requested path if it starts with `/`; otherwise, `/welcome`
+ */
 function getSafeNextPath(nextPath: string) {
   return nextPath.startsWith("/") ? nextPath : "/welcome";
 }
 
+/**
+ * Derives a normalized username from an email address.
+ *
+ * @param email - The email address used to derive the username
+ * @returns The sanitized local part of the email address, or a timestamp-based username when the local part is empty
+ */
 function buildUsernameFromEmail(email: string) {
   const baseUsername = email
     .split("@")[0]
@@ -29,6 +40,11 @@ function buildUsernameFromEmail(email: string) {
   return baseUsername || `user_${Date.now()}`;
 }
 
+/**
+ * Synchronizes an authenticated user's profile with the database.
+ *
+ * @param user - The authenticated user data, including an optional email and avatar URL.
+ */
 async function syncUserToDatabase(user: {
   id: string;
   email?: string | null;
@@ -57,7 +73,12 @@ async function syncUserToDatabase(user: {
   });
 }
 
-// Build absolute URLs so Supabase callbacks work in server actions and previews.
+/**
+ * Builds an absolute URL from a pathname and the current request origin.
+ *
+ * @param pathname - The pathname to resolve
+ * @returns The resulting absolute URL string
+ */
 async function buildAbsoluteUrl(pathname: string) {
   const headerStore = await headers();
   const origin =
@@ -68,13 +89,24 @@ async function buildAbsoluteUrl(pathname: string) {
   return new URL(pathname, origin).toString();
 }
 
-// Preserve the post-auth destination on the callback URL.
+/**
+ * Builds the authentication callback URL with a safe post-authentication destination.
+ *
+ * @param nextPath - The path to visit after authentication.
+ * @returns The absolute callback URL containing the sanitized destination.
+ */
 async function buildAuthCallbackUrl(nextPath = "/welcome") {
   const callbackUrl = new URL(await buildAbsoluteUrl("/auth/callback"));
   callbackUrl.searchParams.set("next", getSafeNextPath(nextPath));
   return callbackUrl.toString();
 }
 
+/**
+ * Initiates OAuth sign-in and redirects the browser to the provider's authorization URL.
+ *
+ * @param provider - The OAuth provider to use.
+ * @param nextPath - The path to visit after authentication.
+ */
 async function signInWithOAuthProvider(
   provider: OAuthProvider,
   nextPath = "/welcome",
@@ -96,15 +128,26 @@ async function signInWithOAuthProvider(
   redirect(data.url);
 }
 
+/**
+ * Initiates authentication with Google.
+ */
 export async function signInWithGoogleAction() {
   await signInWithOAuthProvider("google");
 }
 
+/**
+ * Starts authentication with GitHub.
+ */
 export async function signInWithGithubAction() {
   await signInWithOAuthProvider("github");
 }
 
-// Parse and validate form state before handing off to the shared sign-up flow.
+/**
+ * Processes sign-up form data and initiates user registration.
+ *
+ * @param formData - Form data containing the user's email and password
+ * @returns The sign-up result, including an error when either credential is invalid
+ */
 export async function signUpUserAction(
   _prevState: ResponseResult,
   formData: FormData,
@@ -123,6 +166,13 @@ export async function signUpUserAction(
   return signUpNewUser(email, password);
 }
 
+/**
+ * Registers a user with email and password.
+ *
+ * @param email - The user's email address
+ * @param password - The user's password
+ * @returns A result indicating whether registration succeeded, including an error message when it fails
+ */
 export async function signUpNewUser(
   email: string,
   password: string,
@@ -146,6 +196,12 @@ export async function signUpNewUser(
   };
 }
 
+/**
+ * Processes form data to authenticate a user with an email address and password.
+ *
+ * @param formData - Form data containing the user's email and password.
+ * @returns The sign-in result, including success status and any error message.
+ */
 export async function signInUserAction(
   _prevState: ResponseResult,
   formData: FormData,
@@ -164,6 +220,13 @@ export async function signInUserAction(
   return signInUser(email, password);
 }
 
+/**
+ * Signs in a user with email and password and synchronizes their database record.
+ *
+ * @param email - The user's email address
+ * @param password - The user's password
+ * @returns A result indicating whether sign-in succeeded, including an error message when it fails
+ */
 export async function signInUser(
   email: string,
   password: string,
@@ -196,6 +259,11 @@ export async function signInUser(
   };
 }
 
+/**
+ * Signs out the currently authenticated user.
+ *
+ * @returns A success result when sign-out completes, or a failure result containing the authentication error message.
+ */
 export async function signOutUser(): Promise<ResponseResult> {
   const supabase = await createSupabaseServerClient();
   const { error } = await supabase.auth.signOut();
@@ -210,6 +278,11 @@ export async function signOutUser(): Promise<ResponseResult> {
   };
 }
 
+/**
+ * Retrieves the currently authenticated user.
+ *
+ * @returns A successful result containing the authenticated user, or a failure result when no user is available.
+ */
 export async function getCurrentUser(): Promise<ResponseResult> {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase.auth.getUser();

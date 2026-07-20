@@ -4,6 +4,13 @@ import { Separator as SeparatorPrimitive } from "@base-ui/react/separator"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Renders a styled visual separator with horizontal or vertical orientation.
+ *
+ * @param className - Additional classes to apply to the separator.
+ * @param orientation - The separator's orientation; defaults to `"horizontal"`.
+ * @returns The rendered separator element.
+ */
 function Separator({
   className,
   orientation = "horizontal",

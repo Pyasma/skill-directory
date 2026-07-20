@@ -102,6 +102,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated lock icon.
+ *
+ * @param size - The rendered icon dimensions.
+ * @returns The animated lock SVG element.
+ */
 function IconComponent({ size, ...props }: LockProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -144,6 +150,11 @@ function IconComponent({ size, ...props }: LockProps) {
   );
 }
 
+/**
+ * Renders an animated lock icon.
+ *
+ * @param props - The icon properties, including size and animation settings.
+ */
 function Lock(props: LockProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

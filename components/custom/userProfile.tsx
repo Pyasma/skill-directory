@@ -4,6 +4,9 @@ import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+/**
+ * Renders the current user's profile avatar.
+ */
 export default function UserProfile() {
   const supabase = createSupabaseBrowserClient();
   const [avatarUrl, setAvatarUrl] = useState("/favicon.ico");

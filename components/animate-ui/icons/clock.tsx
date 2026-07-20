@@ -40,6 +40,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated clock icon as an SVG.
+ *
+ * @param size - The icon's width and height.
+ * @returns The animated clock SVG element.
+ */
 function IconComponent({ size, ...props }: ClockProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -87,6 +93,12 @@ function IconComponent({ size, ...props }: ClockProps) {
   );
 }
 
+/**
+ * Renders an animated clock icon.
+ *
+ * @param props - Icon properties, including size, animation variant, and SVG attributes.
+ * @returns The wrapped clock icon component.
+ */
 function Clock(props: ClockProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

@@ -5,14 +5,32 @@ import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Provides the root container for a popover.
+ *
+ * @param props - Properties forwarded to the popover root.
+ */
 function Popover({ ...props }: PopoverPrimitive.Root.Props) {
   return <PopoverPrimitive.Root data-slot="popover" {...props} />
 }
 
+/**
+ * Renders the element that toggles the popover.
+ *
+ * @param props - Properties forwarded to the popover trigger.
+ */
 function PopoverTrigger({ ...props }: PopoverPrimitive.Trigger.Props) {
   return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
 }
 
+/**
+ * Renders styled popover content with configurable alignment and placement.
+ *
+ * @param align - The alignment of the content relative to the trigger.
+ * @param alignOffset - The offset applied along the alignment axis.
+ * @param side - The side of the trigger where the content is placed.
+ * @param sideOffset - The offset applied between the content and the trigger.
+ */
 function PopoverContent({
   className,
   align = "center",
@@ -47,6 +65,12 @@ function PopoverContent({
   )
 }
 
+/**
+ * Provides a styled container for popover header content.
+ *
+ * @param className - Additional CSS classes to apply to the header
+ * @param props - Additional properties for the header element
+ */
 function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -57,6 +81,11 @@ function PopoverHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * Renders a styled title for a popover.
+ *
+ * @param className - Additional classes to apply to the title.
+ */
 function PopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props) {
   return (
     <PopoverPrimitive.Title
@@ -67,6 +96,11 @@ function PopoverTitle({ className, ...props }: PopoverPrimitive.Title.Props) {
   )
 }
 
+/**
+ * Renders a styled description for a popover.
+ *
+ * @param className - Additional classes to apply to the description
+ */
 function PopoverDescription({
   className,
   ...props

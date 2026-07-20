@@ -1,5 +1,8 @@
 import { PageShell } from "@/components/layout/page-shell";
 
+/**
+ * Renders the Skills.dev landing page hero section.
+ */
 export default function Home() {
   return (
     <PageShell>

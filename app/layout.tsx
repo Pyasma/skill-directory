@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   description: "Custom Skill Directory for all agents and harness",
 };
 
+/**
+ * Defines the root HTML structure and renders the application content.
+ *
+ * @param children - The content rendered inside the document body.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

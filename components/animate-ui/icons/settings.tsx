@@ -47,6 +47,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders the animated settings icon.
+ *
+ * @param size - The width and height of the icon.
+ * @returns The animated settings SVG element.
+ */
 function IconComponent({ size, ...props }: SettingsProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -84,6 +90,11 @@ function IconComponent({ size, ...props }: SettingsProps) {
   );
 }
 
+/**
+ * Renders the animated settings icon.
+ *
+ * @param props - Properties controlling the icon's appearance and behavior.
+ */
 function Settings(props: SettingsProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

@@ -17,6 +17,12 @@ interface SakuraPetalsProps {
   theme?: "sakura";
 }
 
+/**
+ * Creates a deterministic pseudorandom number generator from an integer seed.
+ *
+ * @param seed - The initial value for the generator.
+ * @returns A generator that produces a floating-point value from 0 inclusive to 1 exclusive on each call.
+ */
 function seededRandom(seed: number) {
   return function () {
     seed |= 0;
@@ -27,10 +33,21 @@ function seededRandom(seed: number) {
   };
 }
 
+/**
+ * Selects the deterministic seed for the selected theme.
+ *
+ * @returns The numeric seed used to generate petal configurations
+ */
 function getThemeSeed(_: SakuraPetalsProps["theme"]) {
   return 1;
 }
 
+/**
+ * Generates 20 deterministic petal configurations for the selected theme.
+ *
+ * @param theme - The theme used to determine the generated petal values
+ * @returns An array of petal configurations with randomized positions, dimensions, opacity, and animation timings
+ */
 function createPetals(theme: SakuraPetalsProps["theme"]): Petal[] {
   const random = seededRandom(getThemeSeed(theme));
 
@@ -46,6 +63,11 @@ function createPetals(theme: SakuraPetalsProps["theme"]): Petal[] {
   }));
 }
 
+/**
+ * Renders animated sakura petals across the viewport.
+ *
+ * @param theme - The visual theme used to generate the petals.
+ */
 export function SakuraPetals({ theme = "sakura" }: SakuraPetalsProps) {
   const petals = useMemo(() => createPetals(theme), [theme]);
 

@@ -38,6 +38,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated chevron-down icon.
+ *
+ * @param size - The icon's width and height.
+ * @param props - Additional SVG properties.
+ */
 function IconComponent({ size, ...props }: ChevronDownProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -65,6 +71,11 @@ function IconComponent({ size, ...props }: ChevronDownProps) {
   );
 }
 
+/**
+ * Renders an animated downward-pointing chevron icon.
+ *
+ * @param props - Configuration and presentation properties for the icon
+ */
 function ChevronDown(props: ChevronDownProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

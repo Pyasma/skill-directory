@@ -63,6 +63,14 @@ ACTIVE EVERY RESPONSE. No revert after many turns. No filler drift. Off only: st
 - Windsurf / Claude Code (.windsurf/rules/caveman.md)
 `;
 
+/**
+ * Renders the caveman skill editor and skills library interface.
+ *
+ * The editor supports visual section editing, raw Markdown editing, locking
+ * controls, AI proposal review, and synchronization status across agent rule paths.
+ *
+ * @returns The welcome page interface.
+ */
 export default function WelcomePage() {
   const supabase = createSupabaseBrowserClient();
   const [user, setUser] = React.useState<User | null>();

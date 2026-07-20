@@ -22,6 +22,11 @@ import {
   signUpUserAction,
 } from "@/lib/auth";
 
+/**
+ * Renders the account creation page with email, password, terms agreement, and social sign-in options.
+ *
+ * @returns The sign-up page interface.
+ */
 export default function SignUpPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);

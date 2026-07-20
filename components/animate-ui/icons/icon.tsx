@@ -93,6 +93,11 @@ const AnimateIconContext = React.createContext<AnimateIconContextValue | null>(
   null,
 );
 
+/**
+ * Provides the current animated icon context.
+ *
+ * @returns The inherited animation context, or default animation settings when no provider is present.
+ */
 function useAnimateIconContext() {
   const context = React.useContext(AnimateIconContext);
   if (!context)
@@ -111,6 +116,13 @@ function useAnimateIconContext() {
   return context;
 }
 
+/**
+ * Combines two event handlers into one handler that invokes them in sequence.
+ *
+ * @param theirs - The first event handler to invoke.
+ * @param ours - The second event handler to invoke.
+ * @returns An event handler that invokes both provided handlers with the event.
+ */
 function composeEventHandlers<E extends React.SyntheticEvent<unknown>>(
   theirs?: (event: E) => void,
   ours?: (event: E) => void,
@@ -124,6 +136,21 @@ function composeEventHandlers<E extends React.SyntheticEvent<unknown>>(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type AnyProps = Record<string, any>;
 
+/**
+ * Wraps content with animation controls triggered by props, hover, tap, or viewport visibility.
+ *
+ * @param asChild - Whether to render the content through the provided child element.
+ * @param animate - Controls activation and optionally selects the animation.
+ * @param animation - The animation to use when `animate` does not specify one.
+ * @param loop - Whether to repeat the animation.
+ * @param loopDelay - The delay between repeated animation cycles.
+ * @param initialOnAnimateEnd - Whether to restore the initial state after each cycle.
+ * @param completeOnStop - Whether to finish the current cycle before stopping.
+ * @param persistOnAnimateEnd - Whether to preserve the final state after animation completion.
+ * @param delay - The delay before starting an animation.
+ * @param render - Content to render when `children` is not provided.
+ * @param children - Content to animate.
+ */
 function AnimateIcon({
   asChild = false,
   animate = false,
@@ -450,6 +477,14 @@ function AnimateIcon({
 const pathClassName =
   "[&_[stroke-dasharray='1px_1px']]:![stroke-dasharray:1px_0px]";
 
+/**
+ * Renders an icon with optional animation configuration and inherited settings from an enclosing `AnimateIcon`.
+ *
+ * @param size - The icon size.
+ * @param animationProp - The animation variant to apply.
+ * @param icon - The icon component to render.
+ * @param className - Additional CSS classes for the icon.
+ */
 function IconWrapper<T extends string>({
   size = 28,
   animation: animationProp,
@@ -576,6 +611,12 @@ function IconWrapper<T extends string>({
   );
 }
 
+/**
+ * Selects animation variants for the current icon animation type.
+ *
+ * @param animations - Variant sets keyed by animation type, including a `default` set.
+ * @returns The variants associated with the current animation type, or the default variants when no matching set exists.
+ */
 function getVariants<
   V extends { default: T; [key: string]: T },
   T extends Record<string, Variants>,

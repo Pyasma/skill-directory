@@ -133,6 +133,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated ellipsis SVG icon.
+ *
+ * @param size - The width and height of the icon.
+ * @returns The animated ellipsis icon.
+ */
 function IconComponent({ size, ...props }: EllipsisProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -181,6 +187,11 @@ function IconComponent({ size, ...props }: EllipsisProps) {
   );
 }
 
+/**
+ * Renders an animated ellipsis icon.
+ *
+ * @param props - Configuration for the icon and its animation.
+ */
 function Ellipsis(props: EllipsisProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

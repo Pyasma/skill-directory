@@ -20,6 +20,12 @@ type SlotProps<T extends HTMLElement = HTMLElement> = {
   children?: any;
 } & DOMMotionProps<T>;
 
+/**
+ * Combines multiple refs into a single callback ref.
+ *
+ * @param refs - The refs that receive the assigned node.
+ * @returns A callback that assigns the node to each provided ref.
+ */
 function mergeRefs<T>(
   ...refs: (React.Ref<T> | undefined)[]
 ): React.RefCallback<T> {
@@ -35,6 +41,13 @@ function mergeRefs<T>(
   };
 }
 
+/**
+ * Combines child and slot properties, including their class names and styles.
+ *
+ * @param childProps - Properties provided by the child element
+ * @param slotProps - Properties provided by the slot
+ * @returns The merged properties with slot values taking precedence
+ */
 function mergeProps<T extends HTMLElement>(
   childProps: AnyProps,
   slotProps: DOMMotionProps<T>,
@@ -58,6 +71,13 @@ function mergeProps<T extends HTMLElement>(
   return merged;
 }
 
+/**
+ * Renders a motion-capable component using the child element and slot properties.
+ *
+ * @param children - The element whose type and properties are used for rendering
+ * @param ref - A ref forwarded to the rendered element
+ * @returns The rendered element, or `null` when the child is not a valid React element
+ */
 function Slot<T extends HTMLElement = HTMLElement>({
   children,
   ref,

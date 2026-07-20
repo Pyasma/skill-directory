@@ -9,6 +9,9 @@ import {
 import BloomPercentage from "./percentage-bar"
 import React from "react";
 
+/**
+ * Displays a score indicator that reveals popover details when hovered.
+ */
 export default function Custompopover() {
     const [open, setOpen] = React.useState(false);
     const percentage = 50

@@ -9,6 +9,14 @@ import { Sidebar, SidebarMenuItem, SidebarHeader, SidebarMenu, SidebarMenuButton
 import UserProfile from "./userProfile";
 import { User } from '@supabase/supabase-js'
 
+/**
+ * Renders a collapsible sidebar for navigating skills, rules, integrations, and settings.
+ *
+ * @param activeSection - The skill section currently selected.
+ * @param onSelectSection - Called with the identifier of a selected skill section.
+ * @param onOpenLibrary - Called when the Skills Library tab is selected.
+ * @returns The rendered sidebar.
+ */
 export default function CustomSidebar({
   activeSection = "overview",
   onSelectSection,

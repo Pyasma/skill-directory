@@ -40,6 +40,13 @@ const buttonVariants = cva(
   }
 )
 
+/**
+ * Renders a styled button with configurable visual variant and size.
+ *
+ * @param className - Additional CSS classes to apply to the button
+ * @param variant - The button's visual style
+ * @param size - The button's size
+ */
 function Button({
   className,
   variant = "default",

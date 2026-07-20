@@ -4,6 +4,11 @@ interface AuthVisualProps {
   gradientTo?: string;
 }
 
+/**
+ * Renders a decorative background image with a gradient transition for authentication pages.
+ *
+ * @param imageSrc - The background image URL or path.
+ */
 export function AuthVisual({
   imageSrc = "/white-magnolia.jpg"
 }: AuthVisualProps) {

@@ -22,6 +22,11 @@ import {
   signInWithGoogleAction,
 } from "@/lib/auth";
 
+/**
+ * Renders the sign-in page with email, password, and social authentication options.
+ *
+ * @returns The authentication page interface.
+ */
 export default function LoginPage() {
   const router = useRouter();
 

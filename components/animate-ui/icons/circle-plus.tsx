@@ -38,6 +38,12 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated circle-plus icon.
+ *
+ * @param size - The rendered icon dimensions.
+ * @returns An animated SVG icon.
+ */
 function IconComponent({ size, ...props }: CirclePlusProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -85,6 +91,12 @@ function IconComponent({ size, ...props }: CirclePlusProps) {
   );
 }
 
+/**
+ * Renders an animated circle-plus icon.
+ *
+ * @param props - Properties controlling the icon's appearance and animation.
+ * @returns The wrapped circle-plus icon.
+ */
 function CirclePlus(props: CirclePlusProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }

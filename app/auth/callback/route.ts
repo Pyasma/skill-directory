@@ -2,6 +2,12 @@ import { type NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import prisma from "@/db/prisma";
 
+/**
+ * Validates a redirect path and provides a safe default when it is missing or invalid.
+ *
+ * @param nextPath - The candidate redirect path.
+ * @returns `nextPath` if it starts with `/`, or `"/welcome"` otherwise.
+ */
 function getSafeNextPath(nextPath: string | null) {
   if (!nextPath || !nextPath.startsWith("/")) {
     return "/welcome";
@@ -10,6 +16,12 @@ function getSafeNextPath(nextPath: string | null) {
   return nextPath;
 }
 
+/**
+ * Builds a normalized username from an email address.
+ *
+ * @param email - The email address used to derive the username
+ * @returns The normalized local part of the email, or a timestamp-based username when the normalized result is empty
+ */
 function buildUsernameFromEmail(email: string) {
   const baseUsername = email
     .split("@")[0]
@@ -20,6 +32,11 @@ function buildUsernameFromEmail(email: string) {
   return baseUsername || `user_${Date.now()}`;
 }
 
+/**
+ * Processes an authentication callback and redirects the user based on its result.
+ *
+ * @returns A redirect response to the requested path after successful authentication, or to `/sign-in` when authentication fails or no user is found.
+ */
 export async function GET(request: NextRequest) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");

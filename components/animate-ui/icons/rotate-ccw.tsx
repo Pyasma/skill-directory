@@ -43,6 +43,11 @@ const animations = {
   } satisfies Record<string, Variants>,
 } as const;
 
+/**
+ * Renders an animated counterclockwise rotation icon.
+ *
+ * @param size - The width and height of the icon.
+ */
 function IconComponent({ size, ...props }: RotateCcwProps) {
   const { controls } = useAnimateIconContext();
   const variants = getVariants(animations);
@@ -79,6 +84,11 @@ function IconComponent({ size, ...props }: RotateCcwProps) {
   );
 }
 
+/**
+ * Renders an animated counter-clockwise rotation icon.
+ *
+ * @param props - Icon properties controlling its appearance and animation.
+ */
 function RotateCcw(props: RotateCcwProps) {
   return <IconWrapper icon={IconComponent} {...props} />;
 }
