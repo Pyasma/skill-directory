@@ -6,6 +6,8 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -46,8 +48,14 @@ export default function RootLayout({
         jetbrainsMono.variable,
         "font-sans"
       )}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col font-sans bg-white text-slate-900">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-white dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 transition-colors duration-300">
+        <ThemeProvider defaultTheme="light" storageKey="skills-theme">
+          {children}
+          <Toaster richColors position="top-right" />
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -27,27 +27,23 @@ function seededRandom(seed: number) {
   };
 }
 
-function getThemeSeed(_: SakuraPetalsProps["theme"]) {
-  return 1;
-}
+function createPetals(): Petal[] {
+  const random = seededRandom(1);
 
-function createPetals(theme: SakuraPetalsProps["theme"]): Petal[] {
-  const random = seededRandom(getThemeSeed(theme));
-
-  return Array.from({ length: 20 }, (_, i) => ({
+  return Array.from({ length: 22 }, (_, i) => ({
     id: i,
     left: `${random() * 100}%`,
     fallDuration: `${8 + random() * 8}s`,
-    swayDuration: `${2 + random() * 3}s`,
+    swayDuration: `${2.5 + random() * 3}s`,
     delay: `${random() * 10}s`,
-    width: `${8 + random() * 8}px`,
-    height: `${12 + random() * 10}px`,
-    opacity: 0.3 + random() * 0.7,
+    width: `${7 + random() * 9}px`,
+    height: `${11 + random() * 11}px`,
+    opacity: 0.35 + random() * 0.55,
   }));
 }
 
 export function SakuraPetals({ theme = "sakura" }: SakuraPetalsProps) {
-  const petals = useMemo(() => createPetals(theme), [theme]);
+  const petals = useMemo(() => createPetals(), []);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
@@ -64,7 +60,7 @@ export function SakuraPetals({ theme = "sakura" }: SakuraPetalsProps) {
           }}
         >
           <div
-            className="sakura-petal sakura-petal-pink"
+            className="sakura-petal sakura-petal-pink dark:shadow-[0_0_8px_rgba(249,115,22,0.4)]"
             style={{
               width: petal.width,
               height: petal.height,

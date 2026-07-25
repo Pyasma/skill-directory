@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import HeaderSign from "@/components/custom/Header";
+import HeaderSign from "@/components/custom/header";
 import Footer from "@/components/custom/footer";
 import { AuthShell } from "@/components/layout/auth-shell";
 import { AuthVisual } from "@/components/layout/auth-visual";

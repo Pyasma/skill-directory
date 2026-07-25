@@ -74,8 +74,7 @@ type DefaultIconProps<T = string> = {
 type AnimateIconProps<T = string> = WithAsChild<
   HTMLMotionProps<'span'> &
     DefaultIconProps<T> & {
-      children?: React.ReactNode;
-      render?: React.ReactNode;
+      children: React.ReactNode;
       asChild?: boolean;
     }
 >;
@@ -139,7 +138,6 @@ function AnimateIcon({
   completeOnStop = false,
   persistOnAnimateEnd = false,
   delay = 0,
-  render,
   children,
   ...props
 }: AnimateIconProps) {
@@ -413,7 +411,7 @@ function AnimateIcon({
       onPointerUp={handlePointerUp}
       {...props}
     >
-      {children ?? render}
+      {children}
     </Slot>
   ) : (
     <motion.span
@@ -424,7 +422,7 @@ function AnimateIcon({
       onPointerUp={handlePointerUp}
       {...props}
     >
-      {children ?? render}
+      {children}
     </motion.span>
   );
 

@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
+import { updateSession } from '@/lib/supabase/proxy'
 
-export function proxy(request: NextRequest) {
-  const token = request.cookies.get("sb-access-token");
-  if (!token) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-  return NextResponse.next();
+export async function proxy(request: NextRequest) {
+
+   return await updateSession(request)
+
 }
 
 export const config = {
-  matcher: ["/about/:path*"],
+  matcher: ["/welcome/:path*"],
 };
