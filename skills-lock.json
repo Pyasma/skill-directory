@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "lamina-design": {
+      "source": "aryaniyaps/lamina",
+      "sourceType": "github",
+      "skillPath": "skills/lamina-design/SKILL.md",
+      "computedHash": "04a57c32c21f5617ce695cc3839123df44c52d55417760747a8461ffe3e7cf91"
+    }
+  }
+}
